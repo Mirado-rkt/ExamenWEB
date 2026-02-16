@@ -61,18 +61,21 @@ use Tracy\Debugger;
  *
  * For more options, see https://tracy.nette.org/en/configuration
  **********************************************/
-Debugger::enable(); // Auto-detects environment
+// Tracy is installed but disabled by default to avoid showing the debug bar
+// on public pages or when viewing images. Uncomment and configure below
+// when you need Tracy for debugging locally.
+// Debugger::enable(); // Auto-detects environment
 // Debugger::enable(Debugger::Development); // Explicitly set environment
 // Debugger::enable('23.75.345.200'); // Restrict debug bar to specific IPs
+
+// Ensure the debug bar is disabled by default
+Debugger::$showBar = false;
 Debugger::$logDirectory = __DIR__ . $ds . '..' . $ds . 'log'; // Log directory
 Debugger::$strictMode = true; // Show all errors (set to E_ALL & ~E_DEPRECATED for less noise)
 // Debugger::$maxLen = 1000; // Max length of dumped variables (default: 150)
 // Debugger::$maxDepth = 5; // Max depth of dumped structures (default: 3)
 // Debugger::$editor = 'vscode'; // Enable clickable file links in debug bar
 // Debugger::$email = 'your@email.com'; // Send error notifications
-if (Debugger::$showBar === true && php_sapi_name() !== 'cli') {
-	(new TracyExtensionLoader($app)); // Load FlightPHP Tracy extensions
-}
 
 /**********************************************
  *           Database Service Setup           *
