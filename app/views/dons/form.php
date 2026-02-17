@@ -9,7 +9,7 @@
                 </h6>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="<?= base_url('/dons/store') ?>" id="donForm">
+                <form method="POST" action="/dons/store" id="donForm">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="donateur" class="form-label fw-semibold">Donateur</label>
@@ -51,7 +51,7 @@
 
                     <hr>
                     <div class="d-flex justify-content-between">
-                        <a href="<?= base_url('/dons') ?>" class="btn btn-outline-secondary">
+                        <a href="/dons" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Retour
                         </a>
                         <button type="submit" class="btn btn-emerald">

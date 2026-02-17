@@ -70,7 +70,7 @@
         </div>
 
         <div class="mt-3">
-            <a href="<?= base_url('/dons') ?>" class="btn btn-outline-secondary">
+            <a href="/dons" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left me-1"></i> Retour à la liste
             </a>
         </div>

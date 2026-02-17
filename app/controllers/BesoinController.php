@@ -61,7 +61,7 @@ class BesoinController
 
         if ($ville_id === 0 || $type_besoin_id === 0 || $quantite <= 0) {
             flash('error', 'Tous les champs sont requis et la quantité doit être positive.');
-            $this->app->redirect(base_url('/besoins/create'));
+            $this->app->redirect('/besoins/create');
             return;
         }
 
@@ -73,7 +73,7 @@ class BesoinController
         DispatchLogic::executer($this->app->db());
 
         flash('success', 'Besoin enregistré avec succès.');
-        $this->app->redirect(base_url('/besoins'));
+        $this->app->redirect('/besoins');
     }
 
     public function edit(string $id): void
@@ -106,7 +106,7 @@ class BesoinController
 
         if ($ville_id === 0 || $type_besoin_id === 0 || $quantite <= 0) {
             flash('error', 'Tous les champs sont requis.');
-            $this->app->redirect(base_url('/besoins/edit/' . $id));
+            $this->app->redirect('/besoins/edit/' . $id);
             return;
         }
 
@@ -115,13 +115,13 @@ class BesoinController
             [$ville_id, $type_besoin_id, $quantite, (int) $id]
         );
         flash('success', 'Besoin modifié avec succès.');
-        $this->app->redirect(base_url('/besoins'));
+        $this->app->redirect('/besoins');
     }
 
     public function delete(string $id): void
     {
         $this->app->db()->runQuery("DELETE FROM besoin WHERE id = ?", [(int) $id]);
         flash('success', 'Besoin supprimé.');
-        $this->app->redirect(base_url('/besoins'));
+        $this->app->redirect('/besoins');
     }
 }

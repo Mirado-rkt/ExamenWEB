@@ -15,34 +15,7 @@
             <?php endif; ?>
         </p>
     </div>
-    <div class="d-flex gap-2">
-        <form method="POST" action="<?= base_url('/dispatch/initialiser') ?>" class="d-inline"
-              onsubmit="return confirm('Attention : Cette action va réinitialiser toutes les données (dispatch, achats). Continuer ?')">
-            <button type="submit" class="btn btn-warning">
-                <i class="bi bi-arrow-repeat me-1"></i> Initialiser
-            </button>
-        </form>
-        <form method="POST" action="<?= base_url('/dispatch/simuler') ?>" class="d-inline">
-            <button type="submit" class="btn btn-outline-primary">
-                <i class="bi bi-play-circle me-1"></i> Simuler
-            </button>
-        </form>
-        <form method="POST" action="<?= base_url('/dispatch/valider') ?>" class="d-inline"
-              onsubmit="return confirm('Voulez-vous vraiment valider et appliquer le dispatch ?')">
-            <button type="submit" class="btn btn-success">
-                <i class="bi bi-check-circle me-1"></i> Valider le dispatch
-            </button>
-        </form>
-    </div>
 </div>
-
-<?php if (!empty($simulation_mode)): ?>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <i class="bi bi-exclamation-triangle me-2"></i>
-    <strong>Mode Simulation :</strong> Les résultats ci-dessous montrent une simulation. Cliquez sur "Valider le dispatch" pour appliquer les changements.
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-<?php endif; ?>
 
 <!-- Résumé par ville -->
 <div class="card mb-4">
@@ -56,7 +29,7 @@
                     <th>Ville</th>
                     <th>Région</th>
                     <th class="text-end">Besoins (valeur)</th>
-                    <th class="text-end">Don</th>
+                    <th class="text-end">Dispatché</th>
                     <th class="text-end">Reste</th>
                     <th style="width: 180px;">Couverture</th>
                 </tr>
