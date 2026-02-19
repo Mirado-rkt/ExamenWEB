@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div></div>
-    <a href="<?= base_url('/dons/create') ?>" class="btn btn-teal">
+    <a href="/dons/create" class="btn btn-teal">
         <i class="bi bi-plus-lg me-1"></i> Nouveau don
     </a>
 </div>
@@ -44,10 +44,10 @@
                         <td class="text-end fw-semibold"><?= format_ar((float) $d['valeur_totale']) ?></td>
                         <td class="text-muted small"><?= date('d/m/Y H:i', strtotime($d['date_don'])) ?></td>
                         <td class="text-end">
-                            <a href="<?= base_url('/dons/show/' . $d['id']) ?>" class="btn btn-sm btn-outline-info me-1">
+                            <a href="/dons/show/<?= $d['id'] ?>" class="btn btn-sm btn-outline-info me-1">
                                 <i class="bi bi-eye"></i>
                             </a>
-                            <form method="POST" action="<?= base_url('/dons/delete/' . $d['id']) ?>" class="d-inline"
+                            <form method="POST" action="/dons/delete/<?= $d['id'] ?>" class="d-inline"
                                   onsubmit="return confirm('Supprimer ce don et ses détails ?')">
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     <i class="bi bi-trash"></i>

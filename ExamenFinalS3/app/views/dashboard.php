@@ -7,10 +7,10 @@
         <p class="text-muted mb-0 small">Vue d'ensemble des besoins des sinistrés et des dons attribués</p>
     </div>
     <div class="d-flex gap-2">
-        <a href="<?= base_url('/besoins/create') ?>" class="btn btn-primary btn-sm">
+        <a href="/besoins/create" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-lg me-1"></i> Saisir un besoin
         </a>
-        <a href="<?= base_url('/dons/create') ?>" class="btn btn-success btn-sm">
+        <a href="/dons/create" class="btn btn-success btn-sm">
             <i class="bi bi-gift me-1"></i> Saisir un don
         </a>
     </div>
@@ -77,7 +77,7 @@
     <div class="card">
         <div class="card-body text-center py-5 text-muted">
             <i class="bi bi-inbox" style="font-size: 3rem; opacity: 0.3;"></i>
-            <p class="mt-3">Aucun besoin enregistré. <a href="<?= base_url('/besoins/create') ?>">Saisir un besoin</a></p>
+            <p class="mt-3">Aucun besoin enregistré. <a href="/besoins/create">Saisir un besoin</a></p>
         </div>
     </div>
 <?php else: ?>
@@ -91,7 +91,7 @@
                 </h6>
                 <small class="text-muted">Région : <?= e($v['region']) ?></small>
             </div>
-            <a href="<?= base_url('/besoins/create?ville_id=' . (int) $v['id']) ?>" class="btn btn-sm btn-outline-primary">
+            <a href="/besoins/create?ville_id=<?= (int) $v['id'] ?>" class="btn btn-sm btn-outline-primary">
                 <i class="bi bi-plus-lg me-1"></i> Ajouter besoin
             </a>
         </div>

@@ -87,7 +87,7 @@ class DonController
         DispatchLogic::executer($db);
 
         flash('success', 'Don enregistré avec succès.');
-        $this->app->redirect(base_url('/dons'));
+        $this->app->redirect('/dons');
     }
 
     public function show(string $id): void
@@ -120,6 +120,6 @@ class DonController
     {
         $this->app->db()->runQuery("DELETE FROM don WHERE id = ?", [(int) $id]);
         flash('success', 'Don supprimé.');
-        $this->app->redirect(base_url('/dons'));
+        $this->app->redirect('/dons');
     }
 }

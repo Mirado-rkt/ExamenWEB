@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div></div>
-    <a href="<?= base_url('/villes/create') ?>" class="btn btn-teal">
+    <a href="/villes/create" class="btn btn-teal">
         <i class="bi bi-plus-lg me-1"></i> Nouvelle ville
     </a>
 </div>
@@ -36,10 +36,10 @@
                         <td class="fw-semibold"><?= e($v['nom']) ?></td>
                         <td><span class="badge bg-light text-dark border"><?= e($v['region_nom']) ?></span></td>
                         <td class="text-end">
-                            <a href="<?= base_url('/villes/edit/' . $v['id']) ?>" class="btn btn-sm btn-outline-primary me-1">
+                            <a href="/villes/edit/<?= $v['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <form method="POST" action="<?= base_url('/villes/delete/' . $v['id']) ?>" class="d-inline"
+                            <form method="POST" action="/villes/delete/<?= $v['id'] ?>" class="d-inline"
                                   onsubmit="return confirm('Supprimer cette ville ?')">
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     <i class="bi bi-trash"></i>

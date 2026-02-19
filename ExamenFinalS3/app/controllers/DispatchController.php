@@ -134,6 +134,6 @@ class DispatchController
         }
 
         flash('success', 'Simulation du dispatch terminée avec succès.');
-        $this->app->redirect(base_url('/dispatch'));
+        $this->app->redirect('/dispatch');
     }
 }

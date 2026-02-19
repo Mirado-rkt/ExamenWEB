@@ -10,7 +10,7 @@
                 </h6>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="<?= $besoin ? base_url('/besoins/update/' . $besoin['id']) : base_url('/besoins/store') ?>">
+                <form method="POST" action="<?= $besoin ? '/besoins/update/' . $besoin['id'] : '/besoins/store' ?>">
                     <?php $selectedVilleId = (int) ($besoin['ville_id'] ?? ($selected_ville_id ?? 0)); ?>
                     <div class="mb-3">
                         <label for="ville_id" class="form-label fw-semibold">Ville</label>
@@ -41,7 +41,7 @@
                                placeholder="Ex: 500">
                     </div>
                     <div class="d-flex justify-content-between">
-                        <a href="<?= base_url('/besoins') ?>" class="btn btn-outline-secondary">
+                        <a href="/besoins" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Retour
                         </a>
                         <button type="submit" class="btn btn-coral">

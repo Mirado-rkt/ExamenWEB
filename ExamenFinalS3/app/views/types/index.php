@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div></div>
-    <a href="<?= base_url('/types-besoin/create') ?>" class="btn btn-teal">
+    <a href="/types-besoin/create" class="btn btn-teal">
         <i class="bi bi-plus-lg me-1"></i> Nouveau type
     </a>
 </div>
@@ -42,10 +42,10 @@
                         </td>
                         <td class="text-end"><?= format_ar((float) $t['prix_unitaire']) ?></td>
                         <td class="text-end">
-                            <a href="<?= base_url('/types-besoin/edit/' . $t['id']) ?>" class="btn btn-sm btn-outline-primary me-1">
+                            <a href="/types-besoin/edit/<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <form method="POST" action="<?= base_url('/types-besoin/delete/' . $t['id']) ?>" class="d-inline"
+                            <form method="POST" action="/types-besoin/delete/<?= $t['id'] ?>" class="d-inline"
                                   onsubmit="return confirm('Supprimer ce type ?')">
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     <i class="bi bi-trash"></i>

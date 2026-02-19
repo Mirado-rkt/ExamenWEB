@@ -5,43 +5,6 @@
  */
 
 /**
- * Retourne la base URL de l'application
- * Détecte automatiquement le chemin de base - 100% dynamique
- */
-function base_url(string $path = ''): string {
-    static $baseUrl = null;
-    
-    if ($baseUrl === null) {
-        // Obtenir le chemin du dossier racine de l'application
-        $docRoot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
-        $appRoot = rtrim(str_replace('\\', '/', dirname(__DIR__, 2)), '/');
-        
-        // Calculer le chemin relatif entre document root et app root
-        if ($docRoot && strpos($appRoot, $docRoot) === 0) {
-            $baseUrl = substr($appRoot, strlen($docRoot));
-        } else {
-            // Fallback: utiliser SCRIPT_NAME
-            $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-            $baseUrl = rtrim(dirname($scriptName), '/\\');
-        }
-        
-        // Nettoyer le résultat
-        if ($baseUrl === '.' || $baseUrl === '\\' || $baseUrl === false) {
-            $baseUrl = '';
-        }
-    }
-    
-    if ($path === '') {
-        return $baseUrl ?: '/';
-    }
-    // S'assurer que le path commence par /
-    if ($path[0] !== '/') {
-        $path = '/' . $path;
-    }
-    return $baseUrl . $path;
-}
-
-/**
  * Échapper une chaîne pour l'affichage HTML
  */
 function e(?string $str): string {
