@@ -33,10 +33,26 @@ class DonController
             ORDER BY d.date_don DESC
         ");
 
+        // Récupérer les détails (types, catégories, quantités) pour chaque don
+        $don_details = $db->fetchAll("
+            SELECT dd.don_id, dd.quantite, tb.nom AS type_nom, tb.categorie,
+                   (dd.quantite * tb.prix_unitaire) AS valeur
+            FROM don_detail dd
+            JOIN type_besoin tb ON dd.type_besoin_id = tb.id
+            ORDER BY tb.categorie, tb.nom
+        ");
+
+        // Regrouper les détails par don_id
+        $details_par_don = [];
+        foreach ($don_details as $det) {
+            $details_par_don[(int) $det['don_id']][] = $det;
+        }
+
         $this->app->render('dons/index', [
-            'page_title'  => 'Dons reçus',
-            'active_menu' => 'dons',
-            'dons'        => $dons,
+            'page_title'      => 'Dons reçus',
+            'active_menu'     => 'dons',
+            'dons'            => $dons,
+            'details_par_don' => $details_par_don,
         ]);
     }
 
@@ -87,7 +103,7 @@ class DonController
         DispatchLogic::executer($db);
 
         flash('success', 'Don enregistré avec succès.');
-        $this->app->redirect('/dons');
+        $this->app->redirect(base_url('/dons'));
     }
 
     public function show(string $id): void
@@ -120,6 +136,6 @@ class DonController
     {
         $this->app->db()->runQuery("DELETE FROM don WHERE id = ?", [(int) $id]);
         flash('success', 'Don supprimé.');
-        $this->app->redirect('/dons');
+        $this->app->redirect(base_url('/dons'));
     }
 }

@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div></div>
-    <a href="/besoins/create" class="btn btn-teal">
+    <a href="<?= base_url('/besoins/create') ?>" class="btn btn-teal">
         <i class="bi bi-plus-lg me-1"></i> Nouveau besoin
     </a>
 </div>
@@ -52,10 +52,10 @@
                         <td class="text-end fw-semibold"><?= format_ar((float) $b['valeur_totale']) ?></td>
                         <td class="text-muted small"><?= date('d/m/Y H:i', strtotime($b['date_saisie'])) ?></td>
                         <td class="text-end">
-                            <a href="/besoins/edit/<?= $b['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
+                            <a href="<?= base_url('/besoins/edit/' . $b['id']) ?>" class="btn btn-sm btn-outline-primary me-1">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <form method="POST" action="/besoins/delete/<?= $b['id'] ?>" class="d-inline"
+                            <form method="POST" action="<?= base_url('/besoins/delete/' . $b['id']) ?>" class="d-inline"
                                   onsubmit="return confirm('Supprimer ce besoin ?')">
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     <i class="bi bi-trash"></i>

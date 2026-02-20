@@ -45,13 +45,13 @@ class RegionController
         $nom = trim($this->app->request()->data->nom ?? '');
         if ($nom === '') {
             flash('error', 'Le nom de la région est requis.');
-            $this->app->redirect('/regions/create');
+            $this->app->redirect(base_url('/regions/create'));
             return;
         }
 
         $this->app->db()->runQuery("INSERT INTO region (nom) VALUES (?)", [$nom]);
         flash('success', 'Région ajoutée avec succès.');
-        $this->app->redirect('/regions');
+        $this->app->redirect(base_url('/regions'));
     }
 
     public function edit(string $id): void
@@ -74,19 +74,19 @@ class RegionController
         $nom = trim($this->app->request()->data->nom ?? '');
         if ($nom === '') {
             flash('error', 'Le nom de la région est requis.');
-            $this->app->redirect('/regions/edit/' . $id);
+            $this->app->redirect(base_url('/regions/edit/' . $id));
             return;
         }
 
         $this->app->db()->runQuery("UPDATE region SET nom = ? WHERE id = ?", [$nom, (int) $id]);
         flash('success', 'Région modifiée avec succès.');
-        $this->app->redirect('/regions');
+        $this->app->redirect(base_url('/regions'));
     }
 
     public function delete(string $id): void
     {
         $this->app->db()->runQuery("DELETE FROM region WHERE id = ?", [(int) $id]);
         flash('success', 'Région supprimée.');
-        $this->app->redirect('/regions');
+        $this->app->redirect(base_url('/regions'));
     }
 }

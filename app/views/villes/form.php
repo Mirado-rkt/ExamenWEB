@@ -10,7 +10,7 @@
                 </h6>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="<?= $ville ? '/villes/update/' . $ville['id'] : '/villes/store' ?>">
+                <form method="POST" action="<?= $ville ? base_url('/villes/update/' . $ville['id']) : base_url('/villes/store') ?>">
                     <div class="mb-3">
                         <label for="nom" class="form-label fw-semibold">Nom de la ville</label>
                         <input type="text" class="form-control" id="nom" name="nom"
@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <a href="/villes" class="btn btn-outline-secondary">
+                        <a href="<?= base_url('/villes') ?>" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Retour
                         </a>
                         <button type="submit" class="btn btn-coral">

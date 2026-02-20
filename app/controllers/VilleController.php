@@ -49,7 +49,7 @@ class VilleController
 
         if ($nom === '' || $region_id === 0) {
             flash('error', 'Tous les champs sont requis.');
-            $this->app->redirect('/villes/create');
+            $this->app->redirect(base_url('/villes/create'));
             return;
         }
 
@@ -58,7 +58,7 @@ class VilleController
             [$nom, $region_id]
         );
         flash('success', 'Ville ajoutée avec succès.');
-        $this->app->redirect('/villes');
+        $this->app->redirect(base_url('/villes'));
     }
 
     public function edit(string $id): void
@@ -87,7 +87,7 @@ class VilleController
 
         if ($nom === '' || $region_id === 0) {
             flash('error', 'Tous les champs sont requis.');
-            $this->app->redirect('/villes/edit/' . $id);
+            $this->app->redirect(base_url('/villes/edit/' . $id));
             return;
         }
 
@@ -96,13 +96,13 @@ class VilleController
             [$nom, $region_id, (int) $id]
         );
         flash('success', 'Ville modifiée avec succès.');
-        $this->app->redirect('/villes');
+        $this->app->redirect(base_url('/villes'));
     }
 
     public function delete(string $id): void
     {
         $this->app->db()->runQuery("DELETE FROM ville WHERE id = ?", [(int) $id]);
         flash('success', 'Ville supprimée.');
-        $this->app->redirect('/villes');
+        $this->app->redirect(base_url('/villes'));
     }
 }

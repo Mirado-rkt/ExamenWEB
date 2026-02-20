@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div></div>
-    <a href="/dons/create" class="btn btn-teal">
+    <a href="<?= base_url('/dons/create') ?>" class="btn btn-teal">
         <i class="bi bi-plus-lg me-1"></i> Nouveau don
     </a>
 </div>
@@ -18,7 +18,7 @@
                     <th>#</th>
                     <th>Donateur</th>
                     <th>Description</th>
-                    <th class="text-center">Lignes</th>
+                    <th>Détails (Type / Catégorie / Quantité)</th>
                     <th class="text-end">Valeur totale</th>
                     <th>Date</th>
                     <th class="text-end">Actions</th>
@@ -38,16 +38,39 @@
                         <td class="text-muted"><?= $d['id'] ?></td>
                         <td class="fw-semibold"><?= e($d['donateur']) ?></td>
                         <td class="text-muted"><?= e($d['description'] ?: '—') ?></td>
-                        <td class="text-center">
-                            <span class="badge bg-light text-dark border"><?= $d['nb_lignes'] ?></span>
+                        <td>
+                            <?php
+                            $details = $details_par_don[(int) $d['id']] ?? [];
+                            if (empty($details)):
+                            ?>
+                                <span class="text-muted">—</span>
+                            <?php else: ?>
+                                <?php foreach ($details as $det): ?>
+                                    <?php
+                                    $cat_colors = [
+                                        'nature'   => 'bg-success',
+                                        'materiau' => 'bg-warning text-dark',
+                                        'argent'   => 'bg-info text-dark',
+                                    ];
+                                    $cat_class = $cat_colors[$det['categorie']] ?? 'bg-secondary';
+                                    $cat_label = ucfirst($det['categorie']);
+                                    ?>
+                                    <div class="mb-1">
+                                        <span class="badge <?= $cat_class ?> me-1"><?= $cat_label ?></span>
+                                        <span class="fw-semibold"><?= e($det['type_nom']) ?></span>
+                                        <span class="text-muted">×</span>
+                                        <span class="fw-bold"><?= format_nb((float) $det['quantite']) ?></span>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </td>
                         <td class="text-end fw-semibold"><?= format_ar((float) $d['valeur_totale']) ?></td>
                         <td class="text-muted small"><?= date('d/m/Y H:i', strtotime($d['date_don'])) ?></td>
                         <td class="text-end">
-                            <a href="/dons/show/<?= $d['id'] ?>" class="btn btn-sm btn-outline-info me-1">
+                            <a href="<?= base_url('/dons/show/' . $d['id']) ?>" class="btn btn-sm btn-outline-info me-1">
                                 <i class="bi bi-eye"></i>
                             </a>
-                            <form method="POST" action="/dons/delete/<?= $d['id'] ?>" class="d-inline"
+                            <form method="POST" action="<?= base_url('/dons/delete/' . $d['id']) ?>" class="d-inline"
                                   onsubmit="return confirm('Supprimer ce don et ses détails ?')">
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
                                     <i class="bi bi-trash"></i>

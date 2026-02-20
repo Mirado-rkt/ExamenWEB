@@ -10,7 +10,7 @@
                 </h6>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="<?= $besoin ? '/besoins/update/' . $besoin['id'] : '/besoins/store' ?>">
+                <form method="POST" action="<?= $besoin ? base_url('/besoins/update/' . $besoin['id']) : base_url('/besoins/store') ?>">
                     <?php $selectedVilleId = (int) ($besoin['ville_id'] ?? ($selected_ville_id ?? 0)); ?>
                     <div class="mb-3">
                         <label for="ville_id" class="form-label fw-semibold">Ville</label>
@@ -40,8 +40,14 @@
                                value="<?= e($besoin['quantite'] ?? '') ?>" required min="0.01" step="0.01"
                                placeholder="Ex: 500">
                     </div>
+                    <div class="mb-3">
+                        <label for="date_saisie" class="form-label fw-semibold">Date de saisie</label>
+                        <input type="datetime-local" class="form-control" id="date_saisie" name="date_saisie"
+                               value="<?= e($besoin['date_saisie'] ?? date('Y-m-d\TH:i')) ?>" required>
+                        <small class="text-muted">Date à utiliser comme critère de priorité pour le dispatch</small>
+                    </div>
                     <div class="d-flex justify-content-between">
-                        <a href="/besoins" class="btn btn-outline-secondary">
+                        <a href="<?= base_url('/besoins') ?>" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Retour
                         </a>
                         <button type="submit" class="btn btn-coral">
