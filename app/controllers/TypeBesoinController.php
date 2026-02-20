@@ -42,7 +42,7 @@ class TypeBesoinController
 
         if ($nom === '' || $categorie === '' || $prix_unitaire <= 0) {
             flash('error', 'Tous les champs sont requis et le prix doit être positif.');
-            $this->app->redirect('/types-besoin/create');
+            $this->app->redirect(base_url('/types-besoin/create'));
             return;
         }
 
@@ -51,7 +51,7 @@ class TypeBesoinController
             [$nom, $categorie, $prix_unitaire]
         );
         flash('success', 'Type de besoin ajouté avec succès.');
-        $this->app->redirect('/types-besoin');
+        $this->app->redirect(base_url('/types-besoin'));
     }
 
     public function edit(string $id): void
@@ -78,7 +78,7 @@ class TypeBesoinController
 
         if ($nom === '' || $categorie === '' || $prix_unitaire <= 0) {
             flash('error', 'Tous les champs sont requis et le prix doit être positif.');
-            $this->app->redirect('/types-besoin/edit/' . $id);
+            $this->app->redirect(base_url('/types-besoin/edit/' . $id));
             return;
         }
 
@@ -87,13 +87,13 @@ class TypeBesoinController
             [$nom, $categorie, $prix_unitaire, (int) $id]
         );
         flash('success', 'Type de besoin modifié avec succès.');
-        $this->app->redirect('/types-besoin');
+        $this->app->redirect(base_url('/types-besoin'));
     }
 
     public function delete(string $id): void
     {
         $this->app->db()->runQuery("DELETE FROM type_besoin WHERE id = ?", [(int) $id]);
         flash('success', 'Type de besoin supprimé.');
-        $this->app->redirect('/types-besoin');
+        $this->app->redirect(base_url('/types-besoin'));
     }
 }

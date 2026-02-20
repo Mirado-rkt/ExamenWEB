@@ -18,9 +18,6 @@ class DashboardController
     {
         $db = $this->app->db();
 
-        // Dispatch automatique à chaque affichage du tableau de bord
-        DispatchLogic::executer($db);
-
         // Statistiques globales
         $stats = [
             'regions'  => (int) $db->fetchField("SELECT COUNT(*) FROM region"),
@@ -80,5 +77,19 @@ class DashboardController
             'stats'       => $stats,
             'villes'      => $villes,
         ]);
+    }
+
+    /**
+     * Réinitialiser TOUTES les données à l'état original
+     */
+    public function reinitialiser(): void
+    {
+        $db = $this->app->db();
+
+        // Utilise la même méthode que DispatchController (TRUNCATE + re-insert)
+        \app\controllers\DispatchController::insererDonneesOriginalesStatic($db);
+
+        flash('success', 'Réinitialisation complète effectuée : toutes les données ont été restaurées à l\'état original.');
+        $this->app->redirect(base_url('/'));
     }
 }

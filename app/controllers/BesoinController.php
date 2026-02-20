@@ -58,22 +58,29 @@ class BesoinController
         $ville_id      = (int) ($data->ville_id ?? 0);
         $type_besoin_id = (int) ($data->type_besoin_id ?? 0);
         $quantite      = (float) ($data->quantite ?? 0);
+        $date_saisie   = trim($data->date_saisie ?? '');
 
         if ($ville_id === 0 || $type_besoin_id === 0 || $quantite <= 0) {
             flash('error', 'Tous les champs sont requis et la quantité doit être positive.');
-            $this->app->redirect('/besoins/create');
+            $this->app->redirect(base_url('/besoins/create'));
             return;
         }
 
+        if ($date_saisie === '') {
+            $date_saisie = date('Y-m-d H:i:s');
+        } else {
+            $date_saisie = date('Y-m-d H:i:s', strtotime($date_saisie));
+        }
+
         $this->app->db()->runQuery(
-            "INSERT INTO besoin (ville_id, type_besoin_id, quantite) VALUES (?, ?, ?)",
-            [$ville_id, $type_besoin_id, $quantite]
+            "INSERT INTO besoin (ville_id, type_besoin_id, quantite, date_saisie) VALUES (?, ?, ?, ?)",
+            [$ville_id, $type_besoin_id, $quantite, $date_saisie]
         );
         // Auto-dispatch après ajout d'un besoin
         DispatchLogic::executer($this->app->db());
 
         flash('success', 'Besoin enregistré avec succès.');
-        $this->app->redirect('/besoins');
+        $this->app->redirect(base_url('/besoins'));
     }
 
     public function edit(string $id): void
@@ -103,25 +110,32 @@ class BesoinController
         $ville_id      = (int) ($data->ville_id ?? 0);
         $type_besoin_id = (int) ($data->type_besoin_id ?? 0);
         $quantite      = (float) ($data->quantite ?? 0);
+        $date_saisie   = trim($data->date_saisie ?? '');
 
         if ($ville_id === 0 || $type_besoin_id === 0 || $quantite <= 0) {
             flash('error', 'Tous les champs sont requis.');
-            $this->app->redirect('/besoins/edit/' . $id);
+            $this->app->redirect(base_url('/besoins/edit/' . $id));
             return;
         }
 
+        if ($date_saisie === '') {
+            $date_saisie = date('Y-m-d H:i:s');
+        } else {
+            $date_saisie = date('Y-m-d H:i:s', strtotime($date_saisie));
+        }
+
         $this->app->db()->runQuery(
-            "UPDATE besoin SET ville_id = ?, type_besoin_id = ?, quantite = ? WHERE id = ?",
-            [$ville_id, $type_besoin_id, $quantite, (int) $id]
+            "UPDATE besoin SET ville_id = ?, type_besoin_id = ?, quantite = ?, date_saisie = ? WHERE id = ?",
+            [$ville_id, $type_besoin_id, $quantite, $date_saisie, (int) $id]
         );
         flash('success', 'Besoin modifié avec succès.');
-        $this->app->redirect('/besoins');
+        $this->app->redirect(base_url('/besoins'));
     }
 
     public function delete(string $id): void
     {
         $this->app->db()->runQuery("DELETE FROM besoin WHERE id = ?", [(int) $id]);
         flash('success', 'Besoin supprimé.');
-        $this->app->redirect('/besoins');
+        $this->app->redirect(base_url('/besoins'));
     }
 }

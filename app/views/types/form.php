@@ -10,7 +10,7 @@
                 </h6>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="<?= $type ? '/types-besoin/update/' . $type['id'] : '/types-besoin/store' ?>">
+                <form method="POST" action="<?= $type ? base_url('/types-besoin/update/' . $type['id']) : base_url('/types-besoin/store') ?>">
                     <div class="mb-3">
                         <label for="nom" class="form-label fw-semibold">Nom</label>
                         <input type="text" class="form-control" id="nom" name="nom"
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <a href="/types-besoin" class="btn btn-outline-secondary">
+                        <a href="<?= base_url('/types-besoin') ?>" class="btn btn-outline-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Retour
                         </a>
                         <button type="submit" class="btn btn-teal">

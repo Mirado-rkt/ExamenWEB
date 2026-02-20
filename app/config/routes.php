@@ -7,19 +7,21 @@ use app\controllers\TypeBesoinController;
 use app\controllers\BesoinController;
 use app\controllers\DonController;
 use app\controllers\DispatchController;
+use app\controllers\AchatController;
+use app\controllers\BesoinsRestantsController;
+use app\controllers\RecapController;
 use app\middlewares\SecurityHeadersMiddleware;
-use flight\Engine;
 use flight\net\Router;
 
 /**
  * @var Router $router
- * @var Engine $app
  */
 
-$router->group('', function (Router $router) use ($app) {
+$router->group('', function (Router $router) {
 
 	// ===== TABLEAU DE BORD =====
 	$router->get('/', [DashboardController::class, 'index']);
+	$router->post('/reinitialiser', [DashboardController::class, 'reinitialiser']);
 
 	// ===== RÉGIONS =====
 	$router->get('/regions', [RegionController::class, 'index']);
@@ -62,5 +64,22 @@ $router->group('', function (Router $router) use ($app) {
 
 	// ===== DISPATCH =====
 	$router->get('/dispatch', [DispatchController::class, 'index']);
+	$router->post('/dispatch/initialiser', [DispatchController::class, 'initialiser']);
+	$router->post('/dispatch/reinitialiser', [DispatchController::class, 'reinitialiser']);
+	$router->post('/dispatch/simuler', [DispatchController::class, 'simuler']);
+	$router->post('/dispatch/valider', [DispatchController::class, 'valider']);
+
+	// ===== BESOINS RESTANTS =====
+	$router->get('/besoins-restants', [BesoinsRestantsController::class, 'index']);
+
+	// ===== ACHATS =====
+	$router->get('/achats', [AchatController::class, 'index']);
+	$router->get('/achats/create', [AchatController::class, 'create']);
+	$router->post('/achats/store', [AchatController::class, 'store']);
+	$router->post('/achats/delete/@id', [AchatController::class, 'delete']);
+
+	// ===== RÉCAPITULATION =====
+	$router->get('/recap', [RecapController::class, 'index']);
+	$router->get('/recap/data', [RecapController::class, 'getData']);
 
 }, [SecurityHeadersMiddleware::class]);

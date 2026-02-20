@@ -13,10 +13,13 @@
  * This file is NOT tracked by git. Store sensitive credentials here.
  **********************************************/
 
+// Directory separator - doit être défini dans chaque fichier qui l'utilise
+$ds = DIRECTORY_SEPARATOR;
+
 /**********************************************
  *         Application Environment            *
  **********************************************/
-// Set your timezone (e.g., 'America/New_York', 'UTC')wdwdwdw
+// Set your timezone (e.g., 'America/New_York', 'UTC')
 date_default_timezone_set('UTC');
 
 // Error reporting level (E_ALL recommended for development)
@@ -45,8 +48,8 @@ if (empty($app) === true) {
 // You'll need to namespace your classes with "app\folder\" to include them properly
 $app->path(__DIR__ . $ds . '..' . $ds . '..');
 
-// Core config variables
-$app->set('flight.base_url', '/',);           // Base URL for your app. Change if app is in a subdirectory (e.g., '/myapp/')
+// Core config variables - base_url est maintenant détecté automatiquement dans helpers.php
+$app->set('flight.base_url', '/');  // Décommentez si vous voulez forcer une valeur
 $app->set('flight.case_sensitive', false);    // Set true for case sensitive routes. Default: false
 $app->set('flight.log_errors', true);         // Log errors to file. Recommended: true in production
 $app->set('flight.handle_errors', false);     // Let Tracy handle errors if false. Set true to use Flight's error handler
@@ -66,10 +69,16 @@ return [
 	 *         Database Settings          *
 	 **************************************/
 	'database' => [
-		'host'     => '127.0.0.1',
-		'dbname'   => 'bngrc_dons',
-		'user'     => 'root',
-		'password' => '',
+		'host'     => 'localhost:3306',
+		'dbname'   => 'db_s2_ETU004357',
+		'user'     => 'ETU004357',
+		'password' => 'ENPLijvp',
+	],
+	/**************************************
+	 *      Paramètres des Achats         *
+	 **************************************/
+	'achat' => [
+		'frais_pourcent' => 10,  // Frais d'achat en pourcentage (ex: 10 = 10%)
 	],
 
 	// Google OAuth Credentials
