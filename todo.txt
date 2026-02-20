@@ -1,0 +1,9 @@
+
+On peut acheter via les dons en argent les besoins en nature et en matériaux selon les prix unitaires
+dits ci-dessus (saisie et liste des achats filtrables par ville à faire). Il y a un frais d'achat de x%
+configurable. (ex: achat de 100 avec 10%, donc achat de 110). On utilise la page des besoins restants
+pour faire les achats. Il y a un message d'erreur si l'achat existe encore dans les dons restants.
+Page de simulation : il y a un bouton simuler qui permet de voir le résulat et un bouton validation qui
+dispatch vraiment les dons
+Créer une page de récapitulation (avec un bouton actualiser en Ajax) qui affiche :
+les besoins totaux et satisfaits en montant et le montant des besoins restants.
